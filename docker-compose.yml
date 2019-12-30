@@ -1,28 +1,46 @@
-version: "3"
+version: "3.5"
 services:
+ 
+       
+#########################################       
+       
   nginx:
     build: ./nginx
+
     container_name: nginx
+
     volumes:
        - ./nginx/core:/etc/nginx/conf.d
-       - ./nginx/www:/run/php
        - ./nginx/logs:/var/log/nginx
-       - ./php/html:/usr/share/nginx/html
+
     ports:
        - "80:80"
-    links:
-       - php
-       - mysql:db
+
+    networks:
+       - net1
+       - net2
+
     depends_on:
        - mysql
        - php
-  php: 
+  
+
+#########################################
+
+    
+    
+  php:
     build: ./php
     container_name: php-fpm
-    volumes:
-       - ./nginx/www:/run/php
-    links:
-       - mysql    
+    ports: 
+       - 9000    
+    networks:
+       - net2    
+
+  
+#########################################
+
+  
   mysql:
     image: mysql:latest
     ports:
@@ -30,5 +48,17 @@ services:
     container_name: mysql
     environment:
        - MYSQL_ROOT_PASSWORD=$PASSWORD
-         #volumes:
-         #- ./mysql:/var/lib/mysql
+
+    networks:
+       - net2
+
+##########################################
+
+networks:
+   net1:
+        name: out
+        driver: bridge
+   net2: 
+        name: local
+        driver: bridge
+
