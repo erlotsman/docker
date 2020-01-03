@@ -1,4 +1,4 @@
-My docker-compose;
+My docker-compose
 
 1 STEP:
 	git clone https://github.com/erlotsman/docker.git
