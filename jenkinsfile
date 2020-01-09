@@ -34,7 +34,6 @@ pipeline{
                     url: "https://github.com/erlotsman/docker",
                     branch: 'master'
                 ])
-                echo "successfully"
             }    
         }
         stage('Run mysql') {
