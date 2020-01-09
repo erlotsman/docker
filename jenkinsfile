@@ -40,7 +40,10 @@ pipeline{
             steps {
                 withDockerServer([credentialsId: 'cert', uri: 'tcp://3.20.118.83:4342']) {
                     script {
-                        docker.image('mysql:5').run('-p 3306:3306')
+                        docker.image('mysql:5').run(
+                            '-p 3306:3306
+                            -u docker'
+                        )
                     }
                 }    
             }            
