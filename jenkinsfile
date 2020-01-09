@@ -37,12 +37,14 @@ pipeline{
             }    
         }
         stage('Run mysql') {
-            withDockerServer([credentialsId: 'cert', uri: 'tcp://3.20.118.83:4342']) {
-                steps {
-                    script {
-                        docker.image('mysql:5')
-                    }
-                }    
+            script {
+                withDockerServer([credentialsId: 'cert', uri: 'tcp://3.20.118.83:4342']) {
+                    steps {
+                        script {
+                            docker.image('mysql:5')
+                        }
+                    }    
+                }
             }
         }
     }           
