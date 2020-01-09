@@ -39,7 +39,9 @@ pipeline{
         stage('Run mysql') {
             steps {
                 withDockerServer([credentialsId: 'cert', uri: 'tcp://3.20.118.83:4342']) {
-                    mysql.run('-p 3306:3306')                    
+                    script {
+                        mysql.run('-p 3306:3306')
+                    }
                 }    
             }            
         }
