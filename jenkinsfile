@@ -39,7 +39,7 @@ pipeline{
         stage('Run mysql') {
             steps {
                 script {
-                    docker.withServer([credentialsId: 'cert', uri: 'tcp://3.20.118.83:4342']) {
+                    docker.withServer('tcp://3.20.118.83:4342', 'cert') {
                        def image = docker.image('mysql:5').pull()
                     }
                 }    
